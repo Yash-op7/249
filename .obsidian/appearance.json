@@ -1,0 +1,10 @@
+{
+  "theme": "obsidian",
+  "accentColor": "#ff0000",
+  "baseFontSize": 17,
+  "cssTheme": "Obsidianite",
+  "translucency": false,
+  "baseFontSizeAction": true,
+  "textFontFamily": "Verdana",
+  "monospaceFontFamily": ""
+}

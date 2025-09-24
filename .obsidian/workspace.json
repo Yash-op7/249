@@ -74,7 +74,8 @@
               "title": "Bookmarks"
             }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "horizontal",
@@ -171,6 +172,12 @@
   },
   "active": "50eefd4b902a581f",
   "lastOpenFiles": [
+    "Screenshot 2025-09-24 at 1.27.23 PM.png",
+    "Screenshot 2025-09-24 at 1.27.17 PM.png",
+    "Screenshot 2025-09-24 at 1.27.11 PM.png",
+    "Screenshot 2025-09-24 at 1.27.05 PM.png",
+    "Screenshot 2025-09-24 at 9.42.30 AM 1.png",
+    "Screenshot 2025-09-24 at 9.42.30 AM.png",
     "MTI.md",
     "Kafka.md",
     "Backend.md",

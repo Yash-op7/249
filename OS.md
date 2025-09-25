@@ -1,0 +1,1 @@
+The **Operating System (OS)** is software that manages **hardware** (CPU, memory, storage, etc.) and provides a platform for **applications** to run.

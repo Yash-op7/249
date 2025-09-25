@@ -113,7 +113,7 @@ Partition 0:
     - `batch.size`: Max batch size in bytes before sending, regardless of time.
 	- **Why care?**: Bigger batches = better throughput & compression, but adds latency.
 - `compression.type`: 
-	- **What:** Compress batches before sending (`none`, `gzip`, `snappy`, `lz4`, `zstd`).
+	- **What:** Compress batches before sending (`none`, [[gzip]], `snappy`, `lz4`, `zstd`).
 	- **Why care?**: Saves network + storage, can improve throughput, small cpu overhead.
 
 **Brokers:**

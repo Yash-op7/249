@@ -48,6 +48,76 @@ The kernel:
 
 So a program starts with FDs 0, 1, 2 already open, and new files start from 3.
 
+## 🔹 2. What Is a Buffer (`buffer`)?
+
+### ✅ Definition:
+
+A **buffer** is a block of memory (usually an array) provided by your program, where the **kernel will store the data** that it reads from the file (or where it gets data from when writing to a file).
+
+> It’s a **temporary holding space** used to transfer data between the kernel and the program.
+
+### 📌 Example:
+
+```c
+int fd = open("file.txt", O_RDONLY);  // Ask kernel to open file — returns file descriptor
+char buffer[100];                     // Create a buffer in user space
+read(fd, buffer, 100);                // Ask kernel: "please read 100 bytes into this buffer"
+read(fd, buffer, 100);                // Read another 100 bytes into same or different buffer
+close(fd);                            // Ask kernel to close the file and clean up
+
+```
+
+
+In this line:
+
+- `fd` tells the kernel **what to read from**
+    
+- `buffer` is **where to put the data**
+    
+- `100` is the **maximum number of bytes to read**
+    
+
+The kernel will:
+
+- Access the file pointed to by `fd`
+    
+- Copy up to `100` bytes into the memory pointed to by `buffer`
+    
+- Return the **actual number of bytes read**
+    
+
+So the buffer is **allocated by your program**, but **filled by the kernel**.
+
+---
+
+## 🔁 Bringing It All Together
+
+Let’s annotate the example again:
+
+`int fd = open("file.txt", O_RDONLY);  // Ask kernel to open file — returns file descriptor char buffer[100];                     // Create a buffer in user space read(fd, buffer, 100);                // Ask kernel: "please read 100 bytes into this buffer" read(fd, buffer, 100);                // Read another 100 bytes into same or different buffer close(fd);                            // Ask kernel to close the file and clean up`
+
+- Every time you call `read()`, you must:
+    
+    - Provide a valid `fd`
+        
+    - Provide a buffer to receive the data
+        
+    - Specify how many bytes to read
+        
+
+---
+
+## 🧠 Bonus: Why Buffers?
+
+Imagine if you had to read a 1GB file all at once — that would be inefficient and memory-intensive. Instead:
+
+- You read it **in chunks** (buffers) of, say, 4KB or 8KB
+    
+- This is called **buffered I/O**
+    
+
+Also, buffers reduce **context switching** between kernel and user space, making I/O more efficient.
+
 ### 🔹1. What does it mean to "open" a file in the OS context?
 **Opening a file** means asking the operating system (via the kernel) to prepare the file so your program can **read from it**, **write to it**, or **both**.
 ```cpp

@@ -1,7 +1,7 @@
 The **kernel** is the **core part of the [[OS]]**. It acts as a **bridge between applications and the physical hardware**.
 
 ##### Related documents:
-- [[File descriptors]]
+- [[File descriptors & Buffers]]
 - [[Buffer]]
 - 
 ### 🎯 Responsibilities of the Kernel:

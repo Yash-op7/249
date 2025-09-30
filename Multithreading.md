@@ -393,7 +393,7 @@ int main() {
 
 ---
 
-## ⚠️ 5. Race Conditions
+## ⚠️ 5. Race Co[]()nditions
 
 When two or more threads **access shared data at the same time** and the **final result depends on timing**, you get a **race condition**.
 

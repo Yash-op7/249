@@ -20,7 +20,7 @@ See also:
 - Threads within the **same process share**:
     - The **same virtual address space** (memory)
     - File descriptors, global variables, heap
-- But each thread has its own [[**Execution context**]]:
+- But each thread has its own [[Execution context]]:
     - **CPU registers**
     - **Program counter**
     - **Stack** (for function calls and local variables)

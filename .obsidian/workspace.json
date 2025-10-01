@@ -4,25 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "828e5009a2c0b7b3",
+        "id": "f8c892fd3205a986",
         "type": "tabs",
         "children": [
           {
-            "id": "cc47102d864c8aad",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Backend.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Backend"
-            }
-          },
-          {
-            "id": "e53b27848e86ed7b",
+            "id": "33c174838a16f00a",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -36,143 +22,21 @@
             }
           },
           {
-            "id": "8123e5fc0b36bf32",
+            "id": "10df241090353416",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "PubSub.md",
+                "file": "Stateless vs Statefull.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "PubSub"
-            }
-          },
-          {
-            "id": "8d53f3973a2b51c8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Basic Networking Terms.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Basic Networking Terms"
-            }
-          },
-          {
-            "id": "c6e4fb1b22374a09",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Consensus algorithms.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Consensus algorithms"
-            }
-          },
-          {
-            "id": "c9f8578e5ecbb549",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "distributed transactions.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "distributed transactions"
-            }
-          },
-          {
-            "id": "5f2b44686de94da7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Distributed Commit.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Distributed Commit"
-            }
-          },
-          {
-            "id": "57c773d4faaefd56",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {},
-              "icon": "lucide-git-fork",
-              "title": "Graph view"
-            }
-          },
-          {
-            "id": "7f35179064aad231",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Daily.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Daily"
-            }
-          },
-          {
-            "id": "07178904efd8b5d7",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2025-09-30.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-09-30"
-            }
-          },
-          {
-            "id": "17fb0b6648dfaaa4",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2025-09-30.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-09-30"
-            }
-          },
-          {
-            "id": "252e7581f9899ecc",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Distributed Commit.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Distributed Commit"
+              "title": "Stateless vs Statefull"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -247,7 +111,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "PubSub.md",
+                "file": "Stateless vs Statefull.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -257,7 +121,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for PubSub"
+              "title": "Backlinks for Stateless vs Statefull"
             }
           },
           {
@@ -266,12 +130,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "PubSub.md",
+                "file": "Stateless vs Statefull.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from PubSub"
+              "title": "Outgoing links from Stateless vs Statefull"
             }
           },
           {
@@ -295,13 +159,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "PubSub.md",
+                "file": "Stateless vs Statefull.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of PubSub"
+              "title": "Outline of Stateless vs Statefull"
             }
           }
         ]
@@ -321,40 +185,44 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8123e5fc0b36bf32",
+  "active": "10df241090353416",
   "lastOpenFiles": [
-    "Kafka.md",
-    "PubSub.md",
+    "Pasted image 20251001174151.png",
+    "Pasted image 20251001174145.png",
+    "Pasted image 20251001174135.png",
+    "Multiplexing vs Demultiplexing.md",
+    "Pasted image 20251001174056.png",
+    "Pasted image 20251001174045.png",
+    "Pasted image 20251001174026.png",
+    "Pasted image 20251001174017.png",
+    "Stateless vs Statefull.md",
     "Backend Design Patterns.md",
+    "tcp.md",
+    "Pasted image 20251001165910.png",
+    "Multiplexing v/s Demultiplexing.md",
+    "Multiplexing v",
+    "PubSub.md",
+    "Pasted image 20251001164912.png",
+    "Sidecar Pattern.md",
+    "**Canary releases**.md",
+    "Sidecar Proxies.md",
+    "Istio + Envoy.md",
+    "Envoy.md",
+    "microservices.md",
+    "Cascading Failures.md",
+    "Service Mesh.md",
+    "Backend.md",
+    "Distributed Commit.md",
+    "Basic Networking Terms.md",
+    "Consensus algorithms.md",
+    "Kafka.md",
     "Server Sent Events.md",
     "in-flight.md",
-    "Basic Networking Terms.md",
     "Pre-flight.md",
     "Long Polling.md",
     "Short Polling.md",
     "Push.md",
-    "Backend.md",
-    "Distributed Databases.md",
-    "distributed transactions.md",
-    "Distributed Commit.md",
-    "2PC.md",
-    "Coordination Protocols.md",
-    "Consensus algorithms.md",
-    "2025-09-26.md",
-    "2025-09-30.md",
-    "Daily.md",
-    "Execution context.md",
-    "Async vs Sync Workloads.md",
     "249Screenshot 2025-09-30 at 8.52.01 AM.png",
-    "OS.md",
-    "Proccess & threads.md",
-    "Multithreading.md",
-    "Openings - Black.md",
-    "Screenshot 2025-09-24 at 1.27.23 PM.png",
-    "Screenshot 2025-09-24 at 1.27.17 PM.png",
-    "Screenshot 2025-09-24 at 1.27.11 PM.png",
-    "Screenshot 2025-09-24 at 1.27.05 PM.png",
-    "Screenshot 2025-09-24 at 9.42.30 AM 1.png",
-    "Screenshot 2025-09-24 at 9.42.30 AM.png"
+    "Screenshot 2025-09-24 at 1.27.23 PM.png"
   ]
 }

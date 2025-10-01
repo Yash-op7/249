@@ -22,21 +22,63 @@
             }
           },
           {
-            "id": "43cdb9f7f14b663e",
+            "id": "e53b27848e86ed7b",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Distributed Databases.md",
+                "file": "Backend Design Patterns.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Distributed Databases"
+              "title": "Backend Design Patterns"
             }
           },
           {
-            "id": "a04a7d9dd4a264a7",
+            "id": "8123e5fc0b36bf32",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "PubSub.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "PubSub"
+            }
+          },
+          {
+            "id": "8d53f3973a2b51c8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Basic Networking Terms.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Basic Networking Terms"
+            }
+          },
+          {
+            "id": "c6e4fb1b22374a09",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Consensus algorithms.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Consensus algorithms"
+            }
+          },
+          {
+            "id": "c9f8578e5ecbb549",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -47,20 +89,6 @@
               },
               "icon": "lucide-file",
               "title": "distributed transactions"
-            }
-          },
-          {
-            "id": "c9f8578e5ecbb549",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Distributed Commit.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Distributed Commit"
             }
           },
           {
@@ -88,20 +116,6 @@
             }
           },
           {
-            "id": "f9b8771502e9105c",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2025-09-26.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "2025-09-26"
-            }
-          },
-          {
             "id": "7f35179064aad231",
             "type": "leaf",
             "state": {
@@ -113,6 +127,20 @@
               },
               "icon": "lucide-file",
               "title": "Daily"
+            }
+          },
+          {
+            "id": "07178904efd8b5d7",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2025-09-30.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-09-30"
             }
           },
           {
@@ -144,7 +172,7 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -219,7 +247,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Daily.md",
+                "file": "PubSub.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -229,7 +257,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Daily"
+              "title": "Backlinks for PubSub"
             }
           },
           {
@@ -238,12 +266,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "Daily.md",
+                "file": "PubSub.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Daily"
+              "title": "Outgoing links from PubSub"
             }
           },
           {
@@ -267,20 +295,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Daily.md",
+                "file": "PubSub.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Daily"
+              "title": "Outline of PubSub"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 300,
+    "width": 200,
     "collapsed": true
   },
   "left-ribbon": {
@@ -293,35 +321,35 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "7f35179064aad231",
+  "active": "8123e5fc0b36bf32",
   "lastOpenFiles": [
-    "2025-09-26.md",
-    "Daily.md",
-    "2025-09-30.md",
-    "Execution context.md",
-    "Distributed Commit.md",
-    "distributed transactions.md",
-    "Distributed Databases.md",
-    "Backend.md",
-    "Push.md",
+    "Kafka.md",
+    "PubSub.md",
     "Backend Design Patterns.md",
+    "Server Sent Events.md",
+    "in-flight.md",
+    "Basic Networking Terms.md",
+    "Pre-flight.md",
+    "Long Polling.md",
+    "Short Polling.md",
+    "Push.md",
+    "Backend.md",
+    "Distributed Databases.md",
+    "distributed transactions.md",
+    "Distributed Commit.md",
+    "2PC.md",
+    "Coordination Protocols.md",
+    "Consensus algorithms.md",
+    "2025-09-26.md",
+    "2025-09-30.md",
+    "Daily.md",
+    "Execution context.md",
     "Async vs Sync Workloads.md",
     "249Screenshot 2025-09-30 at 8.52.01 AM.png",
     "OS.md",
     "Proccess & threads.md",
     "Multithreading.md",
     "Openings - Black.md",
-    "Chess.md",
-    "virtual machines.md",
-    "virtual memory management**.md",
-    "Kafka.md",
-    "MTI.md",
-    "Docker & Kubernetes.md",
-    "Linux File System.md",
-    "inode.md",
-    "Tech Knowledge Base.md",
-    "Containers.md",
-    "File descriptors & Buffers.md",
     "Screenshot 2025-09-24 at 1.27.23 PM.png",
     "Screenshot 2025-09-24 at 1.27.17 PM.png",
     "Screenshot 2025-09-24 at 1.27.11 PM.png",

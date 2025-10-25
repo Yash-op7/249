@@ -120,6 +120,138 @@ app.get('/slow', async (req, res) => {
 - It’ll start the first one, offload the DB call, and keep handling others.
 - The DB work might run in a separate thread (handled by the DB driver or libuv), but your Express code is still single-threaded.
 
+## ⭐ But if the route is compute heavy synchronous code then:-
+
+### 🧩 Recap: Node.js Execution Model
+
+- **Main thread (Event Loop)** → runs your JavaScript code (Express routes, callbacks, etc.).
+    
+- **libuv thread pool (default 4 threads)** → used for _I/O-bound_ async operations (like file I/O, DNS lookup, crypto hashing, etc.).
+    
+- **Event-driven model** → when something is async, Node.js offloads it and keeps serving other requests.
+    
+
+---
+
+### 💥 The Problem: CPU-bound, Synchronous Computation
+
+Now, if you have something like this:
+```js
+app.get('/heavy', (req, res) => {
+  // Synchronous CPU-bound work
+  const result = doHeavyMathCalculations(); 
+  res.send(result);
+});
+```
+
+and `doHeavyMathCalculations()` is **purely synchronous** and **CPU-heavy** (say, calculating primes, fractals, AI inference, etc.), then:
+
+- That entire computation runs **on the main event loop thread**.
+    
+- While that’s happening, Node **cannot** process any other incoming requests.
+    
+- The libuv worker threads **don’t help** here — because your computation is **not an async operation** that’s handed to libuv.
+    
+- So yes, your server becomes **blocked** until the calculation finishes.
+    
+
+❗❗❗⭐ This means that even if 100 users hit `/heavy`, only one will be processed at a time. Others will just **wait** for the event loop to free up.
+
+---
+### 🧠 Why libuv threads don’t help here
+
+The libuv thread pool only handles **specific** asynchronous operations — mostly I/O or tasks that have been explicitly implemented as async in Node’s C++ core or native addons.
+
+If you write a plain JS function like:
+
+`function compute() {   for (let i = 0; i < 1e10; i++) Math.sqrt(i); }`
+
+— this executes **entirely on the main thread**.  
+libuv isn’t even aware of it.
+
+---
+### 🧰 Solutions: How to Handle CPU-Intensive Work
+
+1. **Worker Threads (Built-in since Node 10.5+)**
+    
+    - These let you run JavaScript in **separate threads**.
+        
+    - Perfect for CPU-bound work.
+```js
+const { Worker } = require('node:worker_threads');
+
+app.get('/heavy', (req, res) => {
+  const worker = new Worker('./heavyWorker.js');
+  worker.once('message', result => res.send(result));
+  worker.postMessage('start');
+});
+```
+
+1. **Child Processes**
+    
+    - Run your heavy work in a separate Node process.
+        
+    - Simpler than threads, but with more memory overhead.
+        
+2. **Cluster Mode**
+    
+    - Run multiple Node processes (workers) that share the same port.
+        
+    - Distributes load across CPU cores.
+        
+    - Still, each process has one event loop — so heavy work in one will block that worker.
+        
+3. **Offload to External Service**
+    
+    - Offload the computation to another microservice or queue worker, and just return a pending response.
+
+### ❗ Important note
+
+- Adding the `async` keyword **does not** make a function run in a separate thread.
+- Example:
+```js
+async function doHeavySyncWork() {
+  for (let i = 0; i < 1e10; i++) Math.sqrt(i);
+}
+```
+Even though it’s `async`, this still runs **entirely on the main thread**, **synchronously**, until the loop finishes.  
+All the `async` keyword does is make the function return a **Promise**.  
+Node **does not** offload it to libuv threads unless:
+
+- The function internally calls something _natively asynchronous_, such as:
+    
+    - `fs.readFile()`
+        
+    - `dns.lookup()`
+        
+    - `crypto.pbkdf2()`
+        
+    - a database driver’s async query
+        
+- or a custom native addon that delegates to the thread pool.
+    
+
+So Node doesn’t “offload everything async automatically” — it offloads _specific built-in async operations_ that are implemented in C++ and registered with libuv.
+
+## Important distinction: Worker Threads vs Child Processes vs libuv Threads
+
+|Feature|libuv Thread Pool|Worker Threads|Child Processes|
+|---|---|---|---|
+|**Created by**|Node’s internal C++ layer|Your JS code (via `worker_threads`)|Your JS code (via `child_process`)|
+|**Purpose**|Handle async _I/O_ and _native_ tasks|Run _JavaScript_ code in parallel threads|Run _separate Node processes_|
+|**Memory Space**|Shared (same process)|Shared memory possible (via `SharedArrayBuffer`)|Completely separate memory|
+|**Communication**|Internal, hidden from you|Via `postMessage` & events|Via inter-process messages (IPC)|
+|**Overhead**|Very low|Moderate|Higher (new process + memory)|
+|**Ideal For**|Async I/O (file, crypto, DNS, etc.)|CPU-bound JS computations|Running isolated scripts, services, or tasks|
+
+So in short:
+
+- **libuv threads** → built-in, invisible, for async _I/O_.
+    
+- **Worker threads** → your way to get _real parallelism_ in JS.
+    
+- **Child processes** → full isolation, best when tasks are independent or need fault isolation.
+
 ---
 
 ### 🛠️ Want True Multithreading?
@@ -148,3 +280,6 @@ If you want true parallel execution in Node.js, you can use:
 - Each core can execute its own thread/instruction stream **independently** at the same time.
 - Modern CPUs have multiple cores (2, 4, 8, 16, or more) to do **true parallelism** — multiple threads/processes running simultaneously.
 - Think of CPU cores as **separate workers** in a factory. More cores = more workers = more work done in parallel.
+
+### ❗Important Distinction: Concurrency v/s Parallelism
+See [[Multithreading]]

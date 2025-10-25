@@ -288,23 +288,23 @@ int main() {
 ```
 
 
-#### 👷🏼 **What does thread-safe mean?**
+#### 👷🏼 1. **What does thread-safe mean?**
 
 - **Thread-safe** means:  
     You can safely access or modify something from **multiple threads at the same time** without causing errors or corrupting data.
     
 - Without thread-safety, if two threads update the same variable simultaneously, data could get mixed up or lost.
 
-#### **What is a thread-safe operation without locks?**
+#### 2.What is a thread-safe operation without locks?
 
 - Usually, to protect shared data, threads use locks (mutexes) to make sure only one thread updates data at a time.
 - **Lock-free thread-safe operations** avoid using locks. Instead, they rely on special hardware instructions that guarantee the operation completes atomically — indivisibly.
-#### **"Operations on atomic variables happen without interruption" — what does this mean?**
+#### 3. "Operations on atomic variables happen without interruption" — what does this mean?
 
 - It means that the operation is **guaranteed to complete fully** before another thread can see the variable in a half-changed state.
 - There is **no waiting for a lock** because these operations use CPU instructions like **compare-and-swap (CAS)** or **atomic increment**.
 - So, **yes**, the operation is performed “immediately” and safely, without lock overhead.
-#### **Is concurrent read/write of atomic variables handled internally by the OS?**
+#### 4. **Is concurrent read/write of atomic variables handled internally by the OS?**
 
 - Not exactly by the OS, but by **special CPU instructions and hardware support**.
 - These instructions ensure that reads/writes are done atomically, so the variable is never in an inconsistent state.
@@ -317,6 +317,15 @@ Imagine a **magic cash register** that **counts money correctly even if multiple
 - The register magically ensures that every single coin added or removed is accounted for correctly, even when multiple cashiers operate simultaneously.
 - This means you never get a wrong total or missing coins because of conflicting updates.
 
+### Quick recap:
+
+|Concept|Explanation|Analogy|
+|---|---|---|
+|Semaphore|Controls how many threads can access a resource at once (N keys for N people)|Set of keys to an office|
+|Thread-safe|Safe for multiple threads to access/modify without causing errors|Multiple cashiers working without mistakes|
+|Atomic operation|Lock-free, indivisible operations guaranteed by CPU instructions|Magic cash register counting money correctly|
+
+-> see [[Multithreading in C++]] before moving on
 
 ## Real-world example: 🏦 Bank Account with threads
 
@@ -391,9 +400,101 @@ int main() {
 
 ```
 
+
+###### 🧠 Key Concepts:
+We pass the BankAccount by reference using std::ref to avoid copying.
+
+Use std::mutex + std::lock_guard to protect shared state.
+
+Without the mutex, balance could get corrupted due to race conditions.
+
+---
+## ✅ 2. **Condition Variable: Producer-Consumer Example**
+
+This demonstrates how one thread waits for a condition, and another thread **notifies** it.
+
+### 🛒 Scenario:
+
+- A **producer** adds items to a queue.
+    
+- A **consumer** waits until items are available, then removes them.
+    
+
+### ✅ Code:
+```css
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+#include <queue>
+
+std::mutex mtx;
+std::condition_variable cv;
+std::queue<int> buffer;
+
+const unsigned int MAX_SIZE = 5;
+
+void producer() {
+    for (int i = 1; i <= 10; ++i) {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, []() { return buffer.size() < MAX_SIZE; }); // wait until space available
+
+        buffer.push(i);
+        std::cout << "Produced: " << i << std::endl;
+
+        cv.notify_all(); // notify consumer
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+
+void consumer() {
+    for (int i = 1; i <= 10; ++i) {
+        std::unique_lock<std::mutex> lock(mtx);
+        cv.wait(lock, []() { return !buffer.empty(); }); // wait until item available
+
+        int item = buffer.front();
+        buffer.pop();
+        std::cout << "Consumed: " << item << std::endl;
+
+        cv.notify_all(); // notify producer
+        std::this_thread::sleep_for(std::chrono::milliseconds(150));
+    }
+}
+
+int main() {
+    std::thread t1(producer);
+    std::thread t2(consumer);
+
+    t1.join();
+    t2.join();
+
+    return 0;
+}
+```
+### 🧠 Explanation:
+
+- `std::condition_variable` allows **waiting for a condition** (like `!buffer.empty()`).
+    
+- `cv.wait(lock, predicate)` automatically unlocks the mutex and re-locks it when the condition is true.
+    
+- `cv.notify_all()` wakes up **all waiting threads** (could also use `notify_one()`).
+
 ---
 
-## ⚠️ 5. Race Co[]()nditions
+## 🧠 Summary
+
+|Feature|Purpose|
+|---|---|
+|`std::thread`|Run code in parallel|
+|`join()`|Waits for thread to finish (or else: runtime error)|
+|`std::mutex`|Prevents race conditions in shared memory|
+|`std::lock_guard`|Automatically locks and unlocks mutex safely|
+|`std::condition_variable`|Lets thread **wait for a condition**, and get notified|
+|`std::ref()`|Pass objects to threads **by reference**|
+
+---
+
+## ⚠️ 5. Race Conditions
 
 When two or more threads **access shared data at the same time** and the **final result depends on timing**, you get a **race condition**.
 

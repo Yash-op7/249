@@ -2,7 +2,7 @@
 
 ![[Pasted image 20251001165910.png]]
 
-Multiplexing: Assume you are getting multiple requests/signals (three user events on the client) into a box, then the box shoves all the signals into a single line then it is called multiplexing, think of the diagram as 3 [[tcp]] connections, converted into 1 tcp connection so in this case you are multiplexing,
+Multiplexing: Assume you are getting multiple requests/signals (three user events on the client) into a box, then the box shoves all the signals into a single line then it is called multiplexing, think of the diagram as 3 [[TCP]] connections ([[Connections in TCP]]), converted into 1 tcp connection so in this case you are multiplexing,
 
 ![[Pasted image 20251001174017.png]]
 #### Multiplexing HTTP/2 on the Backend

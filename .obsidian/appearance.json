@@ -1,8 +1,8 @@
 {
   "theme": "obsidian",
   "accentColor": "#ff0000",
-  "baseFontSize": 20,
-  "cssTheme": "Obsidianite",
+  "baseFontSize": 17,
+  "cssTheme": "Things",
   "translucency": false,
   "baseFontSizeAction": true,
   "textFontFamily": "Verdana",

@@ -1,0 +1,2 @@
+- [[useful shell commands]]
+- [[redis-cli syntax]]

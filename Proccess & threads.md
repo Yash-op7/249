@@ -1,6 +1,7 @@
 See also:
 - **[Process Wikipedia](https://en.wikipedia.org/wiki/Process_(computing))**
 - [[Multithreading]]
+- https://www.youtube.com/shorts/5fPDc1hJvsw for quick revision
 
 - A **process** is an instance of a running program.
 - It’s like a **container** that holds everything needed for a program to run:
@@ -9,6 +10,7 @@ See also:
     - **Data** (variables, heap, stack)
     - **System resources** (open files, network sockets)
     - Its **own state** or **[[Execution context]]** (registers, program counter, etc.)
+    - ![[Pasted image 20251109095716.png]]
 - Processes are **independent** from each other. They have isolated memory spaces — so one process can’t accidentally (or intentionally) modify another’s memory.
 - In OS terms, a process is the unit of resource allocation and scheduling.
 ⭐**Analogy:** Think of a process as a **self-contained ship** with its own crew, supplies, and maps.

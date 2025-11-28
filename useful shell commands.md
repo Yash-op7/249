@@ -1,4 +1,4 @@
-## find command
+[]()[]()## find command
 
 `find . -name "split-examples.js"`
 find the location of a file in the current directory, for example:
@@ -12,3 +12,27 @@ find the location of a file in the current directory, for example:
 
 Delete pods parallely: `gp | awk 'NR > 1 && $1 ~ /worker-/ { print $1 }' | xargs -n1 -P5 kubectl delete pod`
 
+
+#### . **`grep`**
+
+- **`grep`** is used to search through the contents of files or output for patterns.
+    
+    **Flags**:
+    
+    - `-i`: Case-insensitive search.
+        
+    - `-r`: Recursively search directories.
+        
+    - `-v`: Invert the match, showing lines that **do not** match the pattern.
+        
+    - `-n`: Show line numbers.
+        
+    - `-l`: Show only the filenames containing matches.
+        
+    
+    **Example**:
+    
+```sh
+grep -i 'error' /var/log/syslog
+grep -r 'timeout' /var/log/
+```

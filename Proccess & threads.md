@@ -1,4 +1,4 @@
-See also:
+[]()[]()See also:
 - **[Process Wikipedia](https://en.wikipedia.org/wiki/Process_(computing))**
 - [[Multithreading]]
 - https://www.youtube.com/shorts/5fPDc1hJvsw for quick revision

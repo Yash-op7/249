@@ -274,3 +274,7 @@ struct stat {
 - Pages are the **basic unit of [[virtual memory management**]].
     
 - When reading a file, data is often read in page-sized chunks and cached in memory for efficiency.
+
+
+
+## [[JIT]]

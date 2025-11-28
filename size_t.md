@@ -1,4 +1,4 @@
-
+[]()
 ## 🔹 3. What is `size_t`
 
 `size_t` is an **unsigned integer type** used to represent _sizes_ and _indices_.  

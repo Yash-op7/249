@@ -1,4 +1,5 @@
 # Notes
+[[Elixir2]]
 
 - Personal notes made while reading docs, source: https://hexdocs.pm/elixir/
 
@@ -620,7 +621,6 @@ Elixir is functional:
 Everything is function calls + data.
 
 ```iex
-
 defmodule C1 do
 
 def fun(a, b) do
@@ -633,15 +633,14 @@ defp privateFunction, do: fun(3, :secret)
 
 end
 
-```
-
-  
+```  
 
 ## Enum
 
 `Enum.map([1,2,3], &(&1 * 2))`
 
-  
-  
+# 📘 **Alias, Require, Import — What They Are & When To Use Them**
 
-## 📘 Alias, Require, Import — What They Are & When To Use Them
+These three keywords help you **use other modules** in your code more conveniently.
+
+- See also 

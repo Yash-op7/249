@@ -654,3 +654,84 @@ Even best strategy collapses without:
     
 - Drawdown limits
 
+
+## 📘 **VOLUME PROFILE (VISIBLE RANGE) — THE CORE IDEA**
+
+- gives you structural understanding of _where the market cares_, not just price levels.
+- Volume Profile (VPVR) shows **how much volume was traded at each price level**, instead of over time like normal volume bars.
+
+You’re essentially seeing:
+
+### ✔ _Where buyers and sellers agreed the most_
+
+→ These are **high-volume nodes (HVNs)** — stable zones, magnets, congestion.
+
+### ✔ _Where buyers and sellers disagreed the most_
+
+→ These are **low-volume nodes (LVNs)** — rejection zones, breakout points.
+
+### ✔ _The single most important price_
+
+→ **Point of Control (POC)** — highest traded volume price.
+
+### ✔ _The accepted value area_
+
+→ **Value Area (VA)** = region containing **70%** of traded volume (VAH & VAL).
+
+# **HOW VOLUME PROFILE THINKS ABOUT THE MARKET (Auction Logic)**
+
+Markets behave like auctions:
+
+- Price moves away until buyers and sellers stop agreeing.
+- Then it comes back to test “fair value”.
+- Your job in intraday is to read these acceptance/rejection zones.
+
+Volume profile tells you:
+
+### **1. Where price is FAIR → Expect mean reversion**
+
+POC & HVNs = accepted value → price gravitates here.
+
+### **2. Where price is UNFAIR → Expect expansion or rejection**
+
+LVNs = disagreement → price often _rejects_ or _breaks out_.
+
+
+# 🔍 **ANATOMY OF THE VOLUME PROFILE**
+
+![https://blog.opofinance.com/en/wp-content/uploads/2025/07/7-Steps-to-a-Winning-Volume-Profile-Strategy-4.jpg](https://blog.opofinance.com/en/wp-content/uploads/2025/07/7-Steps-to-a-Winning-Volume-Profile-Strategy-4.jpg)
+
+![https://eu-images.contentstack.com/v3/assets/blt73dfd92ee49f59a6/bltbc4f3b6e3f08e790/68a5c06f2d3e6e9760521103/Image_1.jpg](https://eu-images.contentstack.com/v3/assets/blt73dfd92ee49f59a6/bltbc4f3b6e3f08e790/68a5c06f2d3e6e9760521103/Image_1.jpg)
+
+### **1. POC – Point of Control**
+
+- Highest volume price.
+    
+- Acts as **magnet**.
+    
+- Market often returns here intraday.
+    
+
+**Intraday Use:**
+
+- If price is above POC → bullish bias until breakdown.
+    
+- If price is below POC → bearish bias until recovery.
+### **2. Value Area — VAH & VAL**
+
+This is the “fair price zone”.
+
+- **VAH (Value Area High)** → upper boundary of fair value
+    
+- **VAL (Value Area Low)** → lower boundary of fair value
+    
+
+**Intraday Use:**
+
+- VAL → support zone
+    
+- VAH → resistance zone
+    
+- Break + acceptance above/below → trend day coming
+    
+- Rejection → mean reversion

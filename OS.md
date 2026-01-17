@@ -6,6 +6,8 @@ Related pages:
 - [[virtual machines]]
 - [[Proccess & threads]]
 - [[Multithreading]]
+- [[Linux]]
+- [[Bash]]
 
 ### Basic Concepts
 ### 🔧 Who makes the system call?

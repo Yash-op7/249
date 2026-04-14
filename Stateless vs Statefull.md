@@ -239,12 +239,13 @@ This allows QUIC to do things TCP can’t (like very fast connection setup, and 
 
 ## 🔹 Summary Table
 
-|Protocol|Stateful / Stateless|Why|
-|---|---|---|
-|**TCP**|Stateful|Keeps seq numbers, ACKs, window sizes, connection states in OS.|
-|**UDP**|Stateless|Just sends datagrams, no memory of order, delivery, or connections.|
-|**DNS (over UDP)**|Stateless protocol, but client adds queryID|Uses IDs to map replies to requests.|
-|**QUIC (over UDP)**|Stateful|Implements seq, ACKs, retransmission, connectionID in app layer.|
+| Protocol            | Stateful / Stateless                        | Why                                                                 |
+| ------------------- | ------------------------------------------- | ------------------------------------------------------------------- |
+| **TCP**             | Stateful                                    | Keeps seq numbers, ACKs, window sizes, connection states in OS.     |
+| **UDP**             | Stateless                                   | Just sends datagrams, no memory of order, delivery, or connections. |
+| **DNS (over UDP)**  | Stateless protocol, but client adds queryID | Uses IDs to map replies to requests.                                |
+| **QUIC (over UDP)** | Stateful                                    | Implements seq, ACKs, retransmission, connectionID in app layer.    |
+|                     |                                             |                                                                     |
 
 ---
 
@@ -253,3 +254,4 @@ This allows QUIC to do things TCP can’t (like very fast connection setup, and 
 - **Stateless protocols** → simple, lightweight, but the app has to carry context (like DNS query IDs).
     
 - **Stateful protocols** → heavier, but much easier for apps since the protocol handles ordering, reliability, etc.
+

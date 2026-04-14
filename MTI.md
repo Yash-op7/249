@@ -11,3 +11,7 @@
 [[Elixir]]
 
 [[Projects]]
+
+[[DDIA]]
+[[Distributed Systems]]
+[[Design Patterns]]

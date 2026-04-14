@@ -206,7 +206,7 @@ That’s your job via regex.
 ---
 ## ### 🟡 `sed`
 
-**Stream editor**
+[[sed]] = **Stream editor**
 
 - Modifies text
     

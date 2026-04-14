@@ -1,3 +1,6 @@
+- see also:
+- [[Kafka vs Redis pub-sub]]
+
 ## **1. What is Kafka?**
 
 **Apache Kafka** is a _distributed event streaming platform_.
@@ -551,4 +554,163 @@ There are **three main layers** to Kafka security:
 - **Show up with clear architectural diagrams (in words), practical config suggestions, and comfort discussing tradeoffs!**
 
 ---
+## Kafka Offsets
+![[Pasted image 20260118211842.png]]
 
+### Manually committing offsets:
+- while processing events inside a consumer we can use the eachBatch method instead of eachMessage, with autoCommit: false, so that we can manually resolve offsets for each message, see this example:
+```ts
+import { createConsumer } from '../kafka/consumer';
+
+import { withTransaction } from '../db/client';
+
+import { DBTables, KafkaConsumerGroups, KafkaEvents, KafkaTopics, LEDGER_ENTRY_TYPES, PaymentDirection } from '../constants';
+
+import { PoolClient } from 'pg';
+
+  
+
+export async function runLedgerWorker() {
+
+const consumer = createConsumer(KafkaConsumerGroups.LEDGER_WORKERS);
+
+  
+
+await consumer.connect();
+
+await consumer.subscribe({ topic: KafkaTopics.PAYMENTS_EVENTS });
+
+  
+
+console.log('📒 Ledger worker started');
+
+  
+
+await consumer.run({
+
+autoCommit: false,
+
+eachBatch: async ({ batch, resolveOffset, heartbeat, commitOffsetsIfNecessary }) => {
+
+async function onSuccessfulProcessing(offset: string) {
+
+resolveOffset(offset);
+
+await heartbeat();
+
+}
+
+for (const message of batch.messages) {
+
+const isSuccessfullyProcessed = await processSettlementMessage(message);
+
+if (isSuccessfullyProcessed) {
+
+await onSuccessfulProcessing(message.offset);
+
+} else {
+
+// not resolving offset, so message will be retried
+
+}
+
+}
+
+await commitOffsetsIfNecessary();
+
+},
+
+});
+
+}
+
+  
+
+async function processSettlementMessage(message: any): Promise<boolean> {
+
+if (!message.value) return true;
+
+  
+
+const event = JSON.parse(message.value.toString());
+
+  
+
+if (event.event_type !== KafkaEvents.PAYMENT_SETTLED) return true;
+
+  
+
+try {
+
+return await withTransaction(async (client: PoolClient) => {
+
+const exists = await client.query(
+
+`SELECT 1 FROM ${DBTables.PROCESSED_EVENTS} WHERE event_id=$1`,
+
+[event.event_id]
+
+);
+
+  
+
+// Idempotency: already handled → no-op
+
+if (exists.rowCount && exists.rowCount > 0) {
+
+return true;
+
+}
+
+  
+
+const entryType =
+
+event.direction === PaymentDirection.IN ? LEDGER_ENTRY_TYPES.CREDIT : LEDGER_ENTRY_TYPES.DEBIT;
+
+  
+
+await client.query(
+
+`INSERT INTO ${DBTables.LEDGER_ENTRIES} (payment_id, currency, amount_minor, entry_type)
+
+VALUES ($1,$2,$3,$4)`,
+
+[event.payment_id, event.currency, event.amount_minor, entryType]
+
+);
+
+  
+
+await client.query(
+
+`INSERT INTO ${DBTables.PROCESSED_EVENTS} (event_id) VALUES ($1)`,
+
+[event.event_id]
+
+);
+
+return true;
+
+})
+
+} catch (err) {
+
+console.error('Ledger write failed', err);
+
+return false
+
+}
+```
+
+![[Pasted image 20260118220212.png]]![[Pasted image 20260118220142.png]]
+![[Pasted image 20260118220155.png]]
+![[Pasted image 20260118220331.png]]
+![[Pasted image 20260118222334.png]]
+![[Pasted image 20260118222426.png]]
+
+# Kafka limitations
+
+![[Screenshot 2026-04-11 at 9.27.25 PM.png]]
+
+![[Pasted image 20260411212751.png]]

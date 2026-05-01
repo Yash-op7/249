@@ -143,3 +143,8 @@ This trick shows up everywhere:
 	2. Use clear and better variable names
 	3. Dont use auto keyword in function parameter, since it reduces readability
 	4. dont use inline ternaries, it requires more mental effort to understand the code flow
+13. 🔹 `std::nth_element` in C++ (STL)
+![[Pasted image 20260428185154.png]]
+![[Pasted image 20260428185222.png]]![[Screenshot 2026-04-28 at 6.52.35 PM.png]]
+14. DFS on DAG space complexity of recursion stack is O(V) not O(E), think why
+15. 

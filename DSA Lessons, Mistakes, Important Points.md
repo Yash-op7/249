@@ -147,4 +147,18 @@ This trick shows up everywhere:
 ![[Pasted image 20260428185154.png]]
 ![[Pasted image 20260428185222.png]]![[Screenshot 2026-04-28 at 6.52.35 PM.png]]
 14. DFS on DAG space complexity of recursion stack is O(V) not O(E), think why
-15. 
+15. ### Key rule
+
+Space complexity measures:
+
+> maximum extra memory used at the same time
+> mistake made in binary search space complexity by thinking it was O(log(n))
+
+16. ![[Pasted image 20260517023750.png]] from [LC-154](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array-ii/?envType=daily-question&envId=2026-05-16)
+17. Technically:
+
+C++ `sort()` uses:
+
+O(log⁡n)
+
+stack space.

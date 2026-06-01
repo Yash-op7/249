@@ -3,4 +3,4 @@
 [[Checksums]]
 [[Hard Drives]]
 
-[[Notes]]
+[[DDIA-Notes]]

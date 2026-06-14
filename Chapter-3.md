@@ -127,3 +127,55 @@ An <mark>append-only log</mark> is the fastest possible write primitive — sequ
 
 <span style="color:#60a5fa;">**Q:**</span> Your Kafka consumer group is falling behind the producer. Could the storage engine be the bottleneck?
 <span style="color:#4ade80;">**A:**</span> Yes, on the broker side. Kafka brokers serve reads from the [[OS Page Cache]] — if recent messages fit in page cache, reads are served from RAM at memory speed. But if the consumer is far behind and the relevant log segments have been evicted from page cache (because newer segments pushed them out), reads must go to disk, causing a sudden latency spike. The fix is either to increase broker RAM (more page cache), reduce log retention to keep the working set smaller, or add more partitions and consumer instances to reduce per-consumer lag. This is why Kafka operators monitor consumer lag in time, not just message count — a consumer that's hours behind is likely reading cold data from disk.
+
+---
+# personal notes - start
+- simple db — a key value store, append to file on write, do grep | tail -n1 on read
+- great write perf, bad read perf, solution is indexes — an additional data structure derived from primary data which only affects the perf of queries not the contents of db
+- # hash index
+- **index 1: hash index** — an in memory hash map that stores the byte offset of a key's latest value, basically storing where each key's value is located so that read only requires one disk seek (instead of scanning all values)
+- simplistic but a viable approach used in Bitcask (the default storage engine of Riak DB, see [[Bitcask and Riak]])
+- Bitcask offers high-performance reads and writes, subject to the requirement that all the keys fit in the available RAM, since the hash map is kept completely in memory. The values can use more space than there is available memory, since they can be loaded from disk with just one disk seek and If that part of the data file is already in the filesystem cache, a read doesn’t require any disk I/O at all.
+- ideal workload type: there are a lot of writes, but there are not too many distinct keys
+- Improving append-only-log method's write space efficiency:
+	- break the log into segments and perform **compaction** on past segments, compaction is the process of reducing a segment to only contain unique key value pairs with the latest value.
+	- we can also merge several segments together at the same time as performing the compaction
+	- merging and compaction can be done in a background thread which produce new segment files which can be later used to server read traffic.
+	- each segment now has its own in memory hash table, lookup start from most recent segment and go back one by one
+- Important issues in a real implementation
+	- **file format**: CSV is not the best format for a log. It’s faster and simpler to use a binary format that firsts encodes the length of a string in bytes, followed by the raw string
+	- **Deleting records**: special deletion record called "tombstone" need to be appended, which during merging should indicate "discard any previous values for the deleted key"
+	- **Crash recovery**: on db restart, in memory hash maps need to be reconstructed which can take time, so store a snapshot of them on disk (bitcask)
+	- **Partially written records**: use checksums per entry to detect corrupted writes/entries
+	- **Concurrency control:** As writes are appended to the log in a strictly sequential order, a common implementation choice is to have only one writer thread. Data file segments are append-only and otherwise immutable, so they can be read concurrently by multiple threads.
+- Benefits of *Append-only-log* over *in-place* updates design:
+	- write and segment merging are sequential write ops which are super fast and preferred on HDDs as well as SDDs (see [[Hard Drives]])
+	- Concurrency and crash recovery are much simpler if segment files are append-only or immutable.
+	- merging old segments prevents over time fragmentation
+- Limitations:
+	- in memory hash map restriction, total number of keys should fit in ram
+	- range queries on keys are inefficient
+- next indexing structure handles these limitations
+- # SSTables and LSM-trees
+- we make a simple change to the format of the segment files: each log of key value pairs is sorted by key, and each key only occurs once in each segment -> SSTable (Sorted string table)
+- SSTables have several big advantages over "log segments with hash indexes":
+	- Merging segments is simple and efficient, because we can use the merge function from merge sort, since each segment is already sorted by key we can merge 2 sorted segments by looking at the smallest key in each segment one by one and if same key appears in several input segments, we use the precedence order and take the more recent key.
+	- to find a particular key in the file, we dont need to keep an index of all keys in memory, we maintain a sparse index in memory which contains the byte offsets of the starting key of each segment, to find a key we just scan from the lower_bound to the upper_bound of the key, which is a few KB of sequential scan (fast)
+- Constructing and maintaining SSTables
+	- how do you get your data to be sorted by key in the first place? answer [[B-Tree]] for on disk sorted structure and for in-memory sorted structures we have [[red-black and AVL Trees]] - insert keys in any order and read them back in sorted order
+	- now the engine works like this:
+		- when a write comes in, insert the key-value pair to the *memtable* (an in-memory sorted tree data structure, ex: red-black tree)
+		- when the memtable size exceeds a few threshold, usually a few MBs, write it out to disk as an SSTable, which is efficient because the memtable is already sorted, the new SSTable file becomes the most recent segment of the DB, while this disk write is happening, new writes can continue to a new memtable instance.
+		- To serve a read req, try to find the key in the memtable, then the most recent on-disk SSTable segment, then second latest SSTable, and so on
+		- Periodically run a merge and compaction process in the background to combine segment files and to discard overwritten or deleted values.
+	- This scheme works very well. It only suffers from one problem: if the database crashes, the most recent writes (which are in the memtable but not yet written out to disk) are lost. In order to avoid that problem, we can keep a separate log on disk to which every write is immediately appended, just like in the previous section. That log is not in sorted order, but that doesn’t matter, because its only purpose is to restore the memtable after a crash. Every time the memtable is written out to an SSTable, the corresponding log can be discarded.
+- ### Making an LSM-tree out of SSTables
+	- The algorithm described above is essentially what is used in LevelDB and RocksDB, key-value storage engine libraries that are designed to be embedded into other applications, LevelDB can be used in Riak as an alternative to Bitcask. Similar storage engines are used in Cassandra and HBase.
+	- Storage engines that are based on this principle of merging and compacting sorted files are often called **LSM storage engines**
+	- Lucene, an indexing engine for full-text search used by Elasticsearch and Solr, uses a similar method for storing its term dictionary, this mapping from term to document ids is kept in SSTable-like sorted files, which are merged in the background as needed.
+- ### Performance optimizations
+	- a lot of detail goes into making a storage engine perform well in practice.
+	- For example, the LSM-tree algorithm can be slow when looking up keys that do not exist in the database: you have to check the memtable, then the segments all the way back to the oldest
+	- In order to optimize this kind of access, storage engines often use additional [[Bloom filters]]
+	- There are also different strategies to determine the order and timing of how SSTables are compacted and merged. The most common options are size-tiered and leveled compaction. LevelDB and RocksDB use leveled compaction, HBase uses size-tiered, and Cassandra supports both. In size-tiered compaction, newer and smaller SSTables are successively merged into older and larger SSTables. In leveled compaction, the key range is split up into smaller SSTables and older data is moved into separate “levels,” which allows the compaction to proceed more incrementally and use less disk space.
+	- Even though there are many subtleties, **the basic idea of LSM-trees—keeping a cascade of SSTables that are merged in the background—is simple and effective**. Even when the dataset is much bigger than the available memory it continues to work well. Since data is stored in sorted order, you can **efficiently perform range queries** (scanning all keys above some minimum and up to some maximum), and because the disk writes are sequential the **LSM-tree can support remarkably high write throughput.**

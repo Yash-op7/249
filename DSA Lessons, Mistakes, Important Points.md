@@ -162,3 +162,5 @@ C++ `sort()` uses:
 O(log⁡n)
 
 stack space.
+
+18 see [[Segment Trees]]

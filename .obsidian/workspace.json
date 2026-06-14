@@ -8,31 +8,107 @@
         "type": "tabs",
         "children": [
           {
-            "id": "470fde4532bf5fd5",
+            "id": "e7c22fe2d3c6578e",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Stateless vs Statefull.md",
+                "file": "Bitcask and Riak.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Stateless vs Statefull"
+              "title": "Bitcask and Riak"
             }
           },
           {
-            "id": "e7c22fe2d3c6578e",
+            "id": "794453646373b808",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Chapter-3.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Chapter-3"
+            }
+          },
+          {
+            "id": "d36da7f7b0511ec9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "Chapter-3.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
               "title": "Chapter-3"
+            }
+          },
+          {
+            "id": "41229ecccb967b2d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "Bloom filters.md",
+                "mode": "source",
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
+              },
+              "icon": "lucide-file",
+              "title": "Bloom filters"
+            }
+          },
+          {
+            "id": "fba768fc62aed013",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "red-black and AVL Trees.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "red-black and AVL Trees"
+            }
+          },
+          {
+            "id": "f2a27b54e42aafb4",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "red-black and AVL Trees.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "red-black and AVL Trees"
             }
           },
           {
@@ -43,56 +119,24 @@
               "state": {
                 "file": "DSA Lessons, Mistakes, Important Points.md",
                 "mode": "source",
-                "source": false
+                "source": false,
+                "backlinks": true,
+                "backlinkOpts": {
+                  "collapseAll": false,
+                  "extraContext": false,
+                  "sortOrder": "alphabetical",
+                  "showSearch": false,
+                  "searchQuery": "",
+                  "backlinkCollapsed": false,
+                  "unlinkedCollapsed": true
+                }
               },
               "icon": "lucide-file",
               "title": "DSA Lessons, Mistakes, Important Points"
             }
-          },
-          {
-            "id": "0ca6c60677872866",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Kafka.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Kafka"
-            }
-          },
-          {
-            "id": "22e7b0dcadece838",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "CLAUDE.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "CLAUDE"
-            }
-          },
-          {
-            "id": "36fd72e4893a9000",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "Design Patterns.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Design Patterns"
-            }
           }
         ],
-        "currentTab": 3
+        "currentTab": 2
       }
     ],
     "direction": "vertical"
@@ -166,7 +210,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "Kafka.md",
+                "file": "Chapter-3.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -176,7 +220,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Kafka"
+              "title": "Backlinks for Chapter-3"
             }
           },
           {
@@ -214,21 +258,20 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Kafka.md",
+                "file": "SL.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Outline of Kafka"
+              "title": "Outline of SL"
             }
           }
         ]
       }
     ],
     "direction": "horizontal",
-    "width": 200,
-    "collapsed": true
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -241,10 +284,25 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "0ca6c60677872866",
+  "active": "d36da7f7b0511ec9",
   "lastOpenFiles": [
-    "CLAUDE.md",
+    "Bloom filters.md",
+    "B-Tree.md",
     "Chapter-3.md",
+    "red-black and AVL Trees.md",
+    "Untitled 3.md",
+    "Bitcask and Riak.md",
+    "DSA Lessons, Mistakes, Important Points.md",
+    "SL.md",
+    "Hard Drives.md",
+    "Checksums.md",
+    "Screenshot 2025-10-25 at 2.15.28 PM.png",
+    "Screenshot 2026-03-21 at 4.40.23 PM.png",
+    "Segment Trees.md",
+    "C++.md",
+    "Write Amplification.md",
+    "Kafka.md",
+    "CLAUDE.md",
     "Concepts/OS Page Cache.md",
     "Concepts",
     "DDIA-Notes.md",
@@ -252,38 +310,23 @@
     "Untitled 2.canvas",
     "Untitled 1.canvas",
     "DDIA.md",
-    "Kafka.md",
-    "Checksums.md",
     "Design Patterns.md",
-    "DSA Lessons, Mistakes, Important Points.md",
     "SDE_Resume_May2026.pdf",
     "Chapter-2.md",
     "Pasted image 20260517023750.png",
-    "C++.md",
     "Screenshot 2026-04-28 at 6.52.35 PM.png",
     "Pasted image 20260428185222.png",
     "Pasted image 20260428185154.png",
     "Pasted image 20260428185150.png",
-    "Hard Drives.md",
     "Pasted image 20260415143257.png",
     "Pasted image 20260415143013.png",
     "Pasted image 20260415143010.png",
-    "Pasted image 20260415142237.png",
-    "Pasted image 20260415142119.png",
     "MTI.md",
     "Stateless vs Statefull.md",
     "Referential Integrity.md",
     "Kafka vs Redis pub-sub.md",
     "Kafka vs Redis pub/sub.md",
     "Kafka vs Redis pub",
-    "sdf.md",
-    "SSL.md",
-    "Sorting Algorithms.md",
-    "SQL.md",
-    "Algo Trading.md",
-    "AWS.md",
-    "Google Spanner.md",
-    "Untitled 2.md",
     "SSL",
     "Untitled.base",
     "Untitled.canvas",
